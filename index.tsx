@@ -15,7 +15,11 @@ if (container) {
     console.log('App successfully mounted.');
   } catch (error) {
     console.error('Failed to mount React app:', error);
-    container.innerHTML = `<div style="padding:20px; color:red;">Mount Error: ${error}</div>`;
+    // Directly inject error if React fails to mount
+    container.innerHTML = `<div style="padding:40px; text-align:center; font-family:sans-serif; color:#ef4444;">
+      <h2 style="font-weight:900;">MOUNTING FAILURE</h2>
+      <p style="color:#64748b;">${error instanceof Error ? error.message : String(error)}</p>
+    </div>`;
   }
 } else {
   console.error('Target container #root not found.');
