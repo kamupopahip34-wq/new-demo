@@ -5,19 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EarnTask Pro - Task Earning Platform</title>
     <script>
-      // Shim process.env for browser environment to prevent ReferenceErrors
+      // Shim process.env for browser environment
       window.process = window.process || { env: { API_KEY: '' } };
       
-      // Global error logger to catch initialization failures
+      // Global error logger to catch and display initialization failures on screen
       window.onerror = function(msg, url, line, col, error) {
-        console.error('System Error:', msg, 'at', url, 'line:', line);
+        console.error('System Fault:', msg, error);
         const root = document.getElementById('root');
-        if (root && root.innerHTML === '') {
-          root.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#ef4444;text-align:center;padding:20px;">' +
-            '<h2 style="font-weight:900;margin-bottom:8px;">SYSTEM FAULT</h2>' +
-            '<p style="color:#64748b;">' + msg + '</p>' +
-            '<button onclick="location.reload()" style="margin-top:20px;padding:10px 20px;background:#6366f1;color:white;border:none;border-radius:8px;font-weight:bold;cursor:pointer;">REBOOT SYSTEM</button>' +
-            '</div>';
+        if (root) {
+          root.innerHTML = `
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;background:#fef2f2;color:#991b1b;padding:20px;text-align:center;">
+              <div style="background:white;padding:40px;border-radius:24px;shadow:0 20px 25px -5px rgba(0,0,0,0.1);max-width:400px;width:100%;">
+                <h1 style="font-weight:900;margin:0 0 10px 0;font-size:24px;">BOOT ERROR</h1>
+                <p style="color:#451a1a;margin-bottom:20px;font-size:14px;line-height:1.5;">${msg}</p>
+                <button onclick="location.reload()" style="background:#ef4444;color:white;border:none;padding:12px 24px;border-radius:12px;font-weight:bold;cursor:pointer;width:100%;">RETRY INITIALIZATION</button>
+              </div>
+            </div>`;
         }
       };
     </script>
@@ -27,28 +30,21 @@
       body {
         font-family: 'Inter', sans-serif;
         margin: 0;
-        padding: 0;
         background-color: #f8fafc;
       }
-      .gradient-bg {
-        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-      }
       #root:empty::before {
-        content: 'Initializing System...';
+        content: 'STARTING ENGINE...';
         display: flex;
         align-items: center;
         justify-content: center;
         height: 100vh;
         font-weight: 900;
         color: #6366f1;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        letter-spacing: 0.3em;
+        animation: pulse 1.5s infinite;
       }
-      @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.5; }
-      }
+      @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+      .gradient-bg { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); }
     </style>
     <script type="importmap">
 {
