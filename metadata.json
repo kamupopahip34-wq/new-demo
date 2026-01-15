@@ -1,0 +1,7 @@
+{
+  "name": "EarnTask Pro",
+  "description": "A professional task-based earning platform where users complete micro-tasks for rewards and admins manage the entire ecosystem.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
