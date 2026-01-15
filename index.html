@@ -28,6 +28,17 @@
         background: rgba(0, 0, 0, 0.3);
         border-color: rgba(255, 255, 255, 0.1);
       }
+      #root:empty::before {
+        content: 'Initializing System...';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        font-weight: bold;
+        color: #6366f1;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
     </style>
     <script type="importmap">
 {
