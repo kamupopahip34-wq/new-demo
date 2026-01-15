@@ -2,10 +2,12 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
 import { SubmissionStatus } from '../types';
+import { useNavigate } from 'react-router-dom';
 import { Clock, CheckCircle, XCircle, AlertCircle, ExternalLink, Calendar } from 'lucide-react';
 
 export const UserRequests: React.FC = () => {
   const { submissions, currentUser, currency } = useApp();
+  const navigate = useNavigate();
 
   const userSubmissions = submissions
     .filter(s => s.userId === currentUser?.id)
@@ -62,7 +64,7 @@ export const UserRequests: React.FC = () => {
             <div className="flex items-center gap-3 self-end md:self-center">
                <div className="text-right hidden sm:block">
                   <p className="text-[10px] font-black text-gray-400 uppercase">Proof Submitted</p>
-                  <button className="text-xs font-bold text-indigo-600 hover:underline flex items-center gap-1 justify-end">
+                  <button type="button" className="text-xs font-bold text-indigo-600 hover:underline flex items-center gap-1 justify-end">
                     View Screenshot <ExternalLink className="w-3 h-3" />
                   </button>
                </div>
@@ -82,7 +84,11 @@ export const UserRequests: React.FC = () => {
             </div>
             <h3 className="text-xl font-bold text-gray-400">No submissions yet</h3>
             <p className="text-sm text-gray-500 mt-2">Pick an active task and submit your first proof!</p>
-            <button className="mt-6 px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold shadow-lg hover:bg-indigo-700 transition-all">
+            <button 
+              type="button" 
+              onClick={() => navigate('/tasks')}
+              className="mt-6 px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold shadow-lg hover:bg-indigo-700 transition-all"
+            >
               Go to Tasks
             </button>
           </div>

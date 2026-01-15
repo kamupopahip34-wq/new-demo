@@ -43,7 +43,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           </div>
           
           <div className="flex items-center gap-4 border-l dark:border-gray-700 pl-6">
-            <button onClick={toggleDarkMode} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors">
+            <button type="button" onClick={toggleDarkMode} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors">
               {isDarkMode ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-gray-600" />}
             </button>
             <div className="relative">
@@ -72,6 +72,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
               return (
                 <button
                   key={item.path}
+                  type="button"
                   onClick={() => navigate(item.path)}
                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
                     isActive 
@@ -85,6 +86,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
               );
             })}
             <button
+              type="button"
               onClick={() => { logout(); navigate('/login'); }}
               className="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all"
             >
@@ -102,6 +104,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
               return (
                 <button
                   key={item.path}
+                  type="button"
                   onClick={() => navigate(item.path)}
                   className={`flex flex-col items-center gap-1 ${isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-gray-400'}`}
                 >
@@ -116,6 +119,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         {/* Mobile Admin Sidebar Toggle */}
         {isAdmin && (
           <button 
+            type="button"
             onClick={() => setIsSidebarOpen(true)}
             className="md:hidden fixed bottom-6 right-6 w-14 h-14 bg-indigo-600 text-white rounded-full shadow-xl flex items-center justify-center z-50"
           >
@@ -135,6 +139,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 {navItems.map((item) => (
                   <button
                     key={item.path}
+                    type="button"
                     onClick={() => { navigate(item.path); setIsSidebarOpen(false); }}
                     className="w-full flex items-center gap-4 px-4 py-3 text-gray-600 dark:text-gray-300 hover:bg-gray-100 rounded-xl transition-all"
                   >
@@ -144,6 +149,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 ))}
               </nav>
               <button
+                type="button"
                 onClick={() => { logout(); navigate('/login'); }}
                 className="w-full flex items-center gap-4 px-4 py-3 text-red-600"
               >

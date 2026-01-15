@@ -27,8 +27,12 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, setState] = useState<AppState>(() => {
-    const saved = localStorage.getItem('earntask_state');
-    if (saved) return JSON.parse(saved);
+    try {
+      const saved = localStorage.getItem('earntask_state');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error("Failed to restore state from local storage:", e);
+    }
     
     return {
       currentUser: null,
@@ -51,7 +55,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   });
 
   useEffect(() => {
-    localStorage.setItem('earntask_state', JSON.stringify(state));
+    try {
+      localStorage.setItem('earntask_state', JSON.stringify(state));
+    } catch (e) {
+      console.error("Failed to save state to local storage:", e);
+    }
   }, [state]);
 
   const addLog = (action: string, type: 'INFO' | 'WARNING' | 'ERROR' = 'INFO') => {
@@ -128,7 +136,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const submitTaskProof = (taskId: string, proofImage: string, size: number) => {
     if (!state.currentUser) return "User not logged in";
     
-    // Anti-Fraud: Simple hash (length + slice)
     const imageHash = `${size}-${proofImage.substring(100, 200)}`;
     const isDuplicate = state.submissions.some(s => s.imageHash === imageHash);
     
@@ -223,7 +230,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       let updatedUsers = [...prev.users];
 
       if (status === WithdrawalStatus.REJECTED) {
-        // Refund
         updatedUsers = updatedUsers.map(u => u.id === req.userId ? { ...u, balance: u.balance + req.amount } : u);
       }
 

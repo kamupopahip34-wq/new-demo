@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { useNavigate } from 'react-router-dom';
@@ -90,7 +89,7 @@ export const Login: React.FC = () => {
           </form>
 
           <div className="mt-8 pt-8 border-t dark:border-gray-800 text-center">
-            <p className="text-gray-500 text-sm">Don't have an account? <button onClick={() => navigate('/register')} className="text-indigo-600 font-bold hover:underline">Register Here</button></p>
+            <p className="text-gray-500 text-sm">Don't have an account? <button type="button" onClick={() => navigate('/register')} className="text-indigo-600 font-bold hover:underline">Register Here</button></p>
           </div>
           
           <div className="mt-6 text-center">
@@ -115,6 +114,11 @@ export const Register: React.FC = () => {
     navigate('/');
   };
 
+  const handleLegalClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    alert('Legal documentation coming soon.');
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center p-8 bg-gray-50 dark:bg-gray-900">
       <div className="w-full max-w-md bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-xl">
@@ -133,7 +137,7 @@ export const Register: React.FC = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email Address"
               required
-              className="w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-gray-900 rounded-2xl border-none outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
+              className="w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-gray-800 rounded-2xl border-none outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
             />
           </div>
 
@@ -145,7 +149,7 @@ export const Register: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Create Password"
               required
-              className="w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-gray-900 rounded-2xl border-none outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
+              className="w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-gray-800 rounded-2xl border-none outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
             />
           </div>
 
@@ -158,11 +162,11 @@ export const Register: React.FC = () => {
         </form>
 
         <p className="mt-8 text-center text-sm text-gray-500">
-          Already have an account? <button onClick={() => navigate('/login')} className="text-indigo-600 font-bold hover:underline">Log In</button>
+          Already have an account? <button type="button" onClick={() => navigate('/login')} className="text-indigo-600 font-bold hover:underline">Log In</button>
         </p>
 
         <div className="mt-8 pt-6 border-t dark:border-gray-700 text-center">
-          <p className="text-[10px] text-gray-400">By registering, you agree to our <a href="#" className="underline">Terms of Service</a> and <a href="#" className="underline">Privacy Policy</a>.</p>
+          <p className="text-[10px] text-gray-400">By registering, you agree to our <a href="#" onClick={handleLegalClick} className="underline">Terms of Service</a> and <a href="#" onClick={handleLegalClick} className="underline">Privacy Policy</a>.</p>
         </div>
       </div>
     </div>
